@@ -36,9 +36,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		employee.setPassword("chethu");
 		employee.setDesignation("Manager");
 		employeeRepository.save(employee);
-		log.debug("Saved successfully in approveAndRegister");
+		log.info("Saved successfully in approveAndRegister");
 		EmployeeResponse employeeResponse= new EmployeeResponse();
+		BeanUtils.copyProperties(employee, employeeResponse);
 		publisher.sendEmployeeTopic(employeeResponse);
-		log.debug("Saved successfully in sendEmployeeTopic:"+employeeResponse);
+		log.info("Saved successfully in sendEmployeeTopic:"+employeeResponse);
 	}
 }
