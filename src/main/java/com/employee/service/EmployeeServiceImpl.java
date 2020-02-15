@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employee.dto.EmployeeRequestDto;
+import com.employee.dto.EmployeeResponse;
 import com.employee.dto.ResponseDto;
 import com.employee.entity.Employee;
 import com.employee.messagingQueue.Publisher;
@@ -36,5 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 		employee.setDesignation("Manager");
 		employeeRepository.save(employee);
 		log.debug("Saved successfully in approveAndRegister");
+		EmployeeResponse employeeResponse= new EmployeeResponse();
+		publisher.sendEmployeeTopic(employeeResponse);
+		log.debug("Saved successfully in sendEmployeeTopic:"+employeeResponse);
 	}
 }
